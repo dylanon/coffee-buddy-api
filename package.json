@@ -1,0 +1,17 @@
+{
+  "name": "coffee-buddy-api",
+  "version": "0.0.1",
+  "description": "Fulfillment API for Coffee Buddy Google Assistant action.",
+  "main": "index.js",
+  "repository": "https://github.com/dylanon/coffee-buddy-api.git",
+  "author": "Dylan On <dylanon@users.noreply.github.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "micro": "^9.3.4"
+  },
+  "devDependencies": {
+    "now": "^15.4.0",
+    "prettier": "1.18.2"
+  }
+}

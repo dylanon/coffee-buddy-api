@@ -1,0 +1,20 @@
+{
+  "name": "coffee-buddy-api",
+  "version": 2,
+  "env": {
+    "INTENT_GET_BREW_RATIO": "@intent_get_brew_ratio"
+  },
+  "builds": [
+    {
+      "src": "/**/*.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/brew-ratio",
+      "dest": "/routes/brew-ratio.js",
+      "methods": ["POST"]
+    }
+  ]
+}
