@@ -8,10 +8,15 @@
   "license": "MIT",
   "private": false,
   "dependencies": {
+    "express": "^4.17.1",
     "micro": "^9.3.4"
   },
   "devDependencies": {
     "now": "^15.4.0",
     "prettier": "1.18.2"
+  },
+  "scripts": {
+    "dev": "node --inspect index.js",
+    "dev:now": "now dev"
   }
 }

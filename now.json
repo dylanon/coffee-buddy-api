@@ -6,15 +6,14 @@
   },
   "builds": [
     {
-      "src": "/**/*.js",
-      "use": "@now/node"
+      "src": "index.js",
+      "use": "@now/node-server"
     }
   ],
   "routes": [
     {
       "src": "/brew-ratio",
-      "dest": "/routes/brew-ratio.js",
-      "methods": ["POST"]
+      "dest": "/"
     }
   ]
 }
