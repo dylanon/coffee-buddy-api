@@ -2,7 +2,8 @@
   "name": "coffee-buddy-api",
   "version": 2,
   "env": {
-    "INTENT_GET_BREW_RATIO": "@intent_get_brew_ratio"
+    "INTENT_GET_BREW_RATIO": "@intent_get_brew_ratio",
+    "INTENT_GET_BREW_RATIO_BY_CUPS": "@intent_get_brew_ratio_by_cups"
   },
   "builds": [
     {
