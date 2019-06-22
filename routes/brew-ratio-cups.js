@@ -6,15 +6,9 @@ const { createTextResponse } = require('../utils');
 
 module.exports = (req, res) => {
   const {
-    queryResult: { allRequiredParamsPresent, parameters },
-  } = req.body;
-  if (!allRequiredParamsPresent) {
-    const response = createTextResponse(
-      `Sorry, I don't have enough information. ${howTo}`
-    );
-    res.send(response);
-  }
-  const { numberOfCups } = parameters;
+    queryResult: { parameters },
+  } = req.body || { queryResult };
+  const { numberOfCups } = parameters || {};
   let response;
   if (numberOfCups === 0) {
     response = createTextResponse(`0 cups? You don't need my help for that!`);
@@ -23,6 +17,8 @@ module.exports = (req, res) => {
       `I'm not sure what you mean. Ask me to how to make ${numberOfCups *
         -1} cups, though.`
     );
+  } else if (!numberOfCups) {
+    response = createTextResponse(`I'm not sure how to help with that.`);
   } else {
     const totalWater = GRAMS_WATER_PER_CUP_COFFEE * numberOfCups;
     const totalCoffee = (totalWater / GRAMS_WATER_PER_GRAM_COFFEE).toFixed(1);

@@ -5,18 +5,12 @@ const validIngredients = Object.values(INGREDIENTS);
 
 module.exports = async (req, res) => {
   const {
-    queryResult: { allRequiredParamsPresent, parameters },
-  } = req.body;
+    queryResult: { parameters },
+  } = req.body || { queryResult: {} };
   const { knownIngredient, weight } = parameters;
   // Validate required parameters
   const howTo =
     'Try telling me how many grams of ground coffee or water you want to use.';
-  if (!allRequiredParamsPresent) {
-    const response = createTextResponse(
-      `Sorry, I don't have enough information. ${howTo}`
-    );
-    res.send(response);
-  }
   const cleanKnownIngredient = knownIngredient.toLowerCase();
   if (!validIngredients.includes(cleanKnownIngredient)) {
     const response = createTextResponse(
@@ -32,7 +26,7 @@ module.exports = async (req, res) => {
     res.send(response);
   }
   // Populate unknownIngredient if it was not passed
-  let { unknownIngredient } = parameters;
+  let { unknownIngredient } = parameters || {};
   if (!unknownIngredient || !validIngredients.includes(unknownIngredient)) {
     unknownIngredient =
       cleanKnownIngredient === INGREDIENTS.COFFEE
