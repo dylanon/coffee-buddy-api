@@ -12,7 +12,11 @@
   ],
   "routes": [
     {
-      "src": "/brew-ratio",
+      "src": "/",
+      "status": 404
+    },
+    {
+      "src": "/assistant",
       "dest": "/"
     }
   ]

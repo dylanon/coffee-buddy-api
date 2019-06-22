@@ -1,21 +1,13 @@
-const { json } = require('micro');
 const { GRAMS_WATER_PER_GRAM_COFFEE, INGREDIENTS } = require('../constants');
 const { createTextResponse } = require('../utils');
 
-const { INTENT_GET_BREW_RATIO } = process.env;
 const validIngredients = Object.values(INGREDIENTS);
 
 module.exports = async (req, res) => {
-  const body = await json(req);
   const {
-    queryResult: { allRequiredParamsPresent, intent, parameters },
-  } = body;
+    queryResult: { allRequiredParamsPresent, parameters },
+  } = req.body;
   const { knownIngredient, weight } = parameters;
-  // Validate intent
-  if (intent.name !== INTENT_GET_BREW_RATIO) {
-    const response = createTextResponse("Sorry, I don't know how to do that.");
-    res.end(response);
-  }
   // Validate required parameters
   const howTo =
     'Try telling me how many grams of ground coffee or water you want to use.';
@@ -23,21 +15,21 @@ module.exports = async (req, res) => {
     const response = createTextResponse(
       `Sorry, I don't have enough information. ${howTo}`
     );
-    res.end(response);
+    res.send(response);
   }
   const cleanKnownIngredient = knownIngredient.toLowerCase();
   if (!validIngredients.includes(cleanKnownIngredient)) {
     const response = createTextResponse(
       `Sorry, I don't recognize that ingredient. ${howTo}`
     );
-    res.end(response);
+    res.send(response);
   }
   const { amount } = weight;
   if (amount < 0) {
     const response = createTextResponse(
       `I can't deal with all that negativity. 🙃`
     );
-    res.end(response);
+    res.send(response);
   }
   // Populate unknownIngredient if it was not passed
   let { unknownIngredient } = parameters;
@@ -58,5 +50,5 @@ module.exports = async (req, res) => {
   const response = createTextResponse(
     `For ${amount} grams of ${cleanKnownIngredient}, you'll need ${calculatedAmount} grams of ${unknownIngredient}.`
   );
-  res.end(response);
+  res.send(response);
 };
